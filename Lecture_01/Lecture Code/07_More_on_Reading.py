@@ -1,4 +1,4 @@
-f = open("sample_text1.txt",'r',encoding = 'utf-8')
+f = open("test_1.txt",'r',encoding = 'utf-8')
 for line in f:
    print(line)
 f.seek(0)
