@@ -102,8 +102,9 @@ print(20*'-' + 'Begin Q6' + 20*'-')
 def two_text(first_text, second_text):
     first = open(first_text, 'r', encoding='utf-8')
     second = open(second_text, 'r', encoding='utf-8')
-    return list(first.readline()).append(second.readline())
-
+    for line in first:
+        return [first.readline()] + [second.readline()]
+    print(first)
 print(two_text('T1.txt', 'T2.txt'))
 
 
