@@ -50,10 +50,17 @@ print(20*'-' + 'End Q2' + 20*'-')
 # Note: You are allowed to use the strings methods
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q3' + 20*'-')
+variable = 'nice job!'
+text = 'example string {variable} brackets'
+def story_text(text):
+    '''return text.format()'''
+
+    start = text.find('{')
+    end = text.find('}')
+    return start, end
 
 
-
-
+print(story_text(text))
 
 
 
@@ -99,18 +106,13 @@ print(20*'-' + 'End Q5' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q6' + 20*'-')
 
-def two_text(first_text, second_text):
+'''def two_text(first_text, second_text):
     first = open(first_text, 'r', encoding='utf-8')
     second = open(second_text, 'r', encoding='utf-8')
     for line in first:
-        return [first.readline()] + [second.readline()]
-    print(first)
-print(two_text('T1.txt', 'T2.txt'))
+        return line
 
-
-
-
-
+print(two_text('T1.txt', 'T2.txt'))'''
 
 
 print(20*'-' + 'End Q6' + 20*'-')
@@ -122,11 +124,13 @@ print(20*'-' + 'End Q6' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q7' + 20*'-')
 
+def all_letters(file_name, n):
+    letters = 'abcdefghijklmnopqrstuvwxyz'
+    file = open(f'{file_name}.txt', 'w+')
+    for i in range(n):
+        file.write(letters[0:i] + '\n')
 
-
-
-
-
+all_letters('new_file',7)
 
 
 print(20*'-' + 'End Q7' + 20*'-')
@@ -137,7 +141,14 @@ print(20*'-' + 'End Q7' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q8' + 20*'-')
 
+def count_words(file_name):
+    file = open(f"{file_name}.txt", 'r', encoding='utf-8')
+    string = ''
+    for line in file:
+        string += line
+    return len(string.split())
 
+print(count_words('test_1'))
 
 
 
@@ -152,12 +163,10 @@ print(20*'-' + 'End Q8' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q9' + 20*'-')
 
-import itertools
+'''from collections import Counter
 states = ['Newyork', 'Virginia', 'DC', 'Texas']
-
-#result = itertools.coll
-
-
+print(Counter(states))
+'''
 
 
 
@@ -171,12 +180,13 @@ print(20*'-' + 'End Q9' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q10' + 20*'-')
 
-
-
-
-
-
-
+from collections import deque
+list = ["a","b","c"]
+deq = deque(list)
+deq.append(1)
+deq.append(7)
+print(deq)
+print(deq.index(1)) # unsure about this
 
 
 print(20*'-' + 'End Q10' + 20*'-')
@@ -186,11 +196,10 @@ print(20*'-' + 'End Q10' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q11' + 20*'-')
 
-
-
-
-
-
+import os
+path = 'C:\\Users\\brear\\OneDrive\\Desktop\\NLP\\Lecture_01\\Class Ex'
+dir_list = os.listdir(path)
+print(dir_list)
 
 print(20*'-' + 'End Q11' + 20*'-')
 # =================================================================
@@ -200,13 +209,13 @@ print(20*'-' + 'End Q11' + 20*'-')
 print(20*'-' + 'Begin Q12' + 20*'-')
 
 
-
-
-
-
-
-
-
+# This question is finished... causes error when rerun to create new files
+'''
+file = open('fileQ12.txt', 'w')
+file.write('This is the new message for question 12.')
+file.close()
+os.rename('fileQ12.txt', 'fileQ12_new.txt')
+'''
 print(20*'-' + 'End Q12' + 20*'-')
 # =================================================================
 # Class_Ex13:
@@ -214,12 +223,16 @@ print(20*'-' + 'End Q12' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q13' + 20*'-')
 
-
-
-
-
-
-
+path = 'C:\\Users\\brear\\OneDrive\\Desktop\\NLP\\Lecture_01\\Class Ex'
+for instance in os.scandir(path):
+    if instance.is_dir():
+        typ = 'dir'
+    elif instance.is_file():
+        typ = 'file'
+    print('{name} {typ}'.format(
+        name=instance.name,
+        typ=typ,
+    ))
 
 
 print(20*'-' + 'End Q13' + 20*'-')
