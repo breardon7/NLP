@@ -16,10 +16,6 @@ def s1s2(x,y):
 print(s1s2(s1,s2))
 
 
-
-
-
-
 print(20*'-' + 'End Q1' + 20*'-')
 
 # =================================================================
@@ -39,10 +35,6 @@ def count_num(string):
 
 print(count_num(s1))
 
-
-
-
-
 print(20*'-' + 'End Q2' + 20*'-')
 # =================================================================
 # Class_Ex3:
@@ -57,14 +49,10 @@ def story_text(text):
 
     start = text.find('{')
     end = text.find('}')
-    return start, end
+    return text[start+1:end]
 
 
 print(story_text(text))
-
-
-
-
 
 print(20*'-' + 'End Q3' + 20*'-')
 # =================================================================
@@ -106,13 +94,14 @@ print(20*'-' + 'End Q5' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q6' + 20*'-')
 
-'''def two_text(first_text, second_text):
+def two_text(first_text, second_text):
     first = open(first_text, 'r', encoding='utf-8')
     second = open(second_text, 'r', encoding='utf-8')
-    for line in first:
-        return line
+    #with open(first_text, 'r', encoding='utf-8') as first, open(second_text, 'r', encoding='utf-8') as second:
+    for line1, line2 in zip(first, second):
+        return line1 + line2
 
-print(two_text('T1.txt', 'T2.txt'))'''
+print(two_text('T1.txt', 'T2.txt'))
 
 
 print(20*'-' + 'End Q6' + 20*'-')
@@ -151,9 +140,6 @@ def count_words(file_name):
 print(count_words('test_1'))
 
 
-
-
-
 print(20*'-' + 'End Q8' + 20*'-')
 # =================================================================
 # Class_Ex9:
@@ -163,13 +149,9 @@ print(20*'-' + 'End Q8' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q9' + 20*'-')
 
-'''from collections import Counter
-states = ['Newyork', 'Virginia', 'DC', 'Texas']
-print(Counter(states))
-'''
-
-
-
+from collections import Counter
+c = Counter('sjidfnousnfsjkfn')
+print(sorted(c.elements()))
 
 print(20*'-' + 'End Q9' + 20*'-')
 # =================================================================
@@ -181,12 +163,15 @@ print(20*'-' + 'End Q9' + 20*'-')
 print(20*'-' + 'Begin Q10' + 20*'-')
 
 from collections import deque
+from itertools import islice
 list = ["a","b","c"]
 deq = deque(list)
-deq.append(1)
+deq.append([1])
 deq.append(7)
-print(deq)
-print(deq.index(1)) # unsure about this
+list2 = []
+for i in range(deq.index('b'),deq.index(7)):
+    list2.append(deq[i])
+print(list2)
 
 
 print(20*'-' + 'End Q10' + 20*'-')
@@ -237,10 +222,14 @@ for instance in os.scandir(path):
 
 print(20*'-' + 'End Q13' + 20*'-')
 # =================================================================
-# Class_Ex14:
-#
 # ----------------------------------------------------------------
-print(20*'-' + 'Begin Q14' + 20*'-')
+print(20*'-' + 'Begin E1' + 20*'-')
+input = input()
+
+print(sum(map(str.isupper, input)))
+print(sum(map(str.islower, input)))
+print(sum(map(str.isnumeric, input)))
+print(map(str.count(" "), input))
 
 
 
@@ -248,14 +237,11 @@ print(20*'-' + 'Begin Q14' + 20*'-')
 
 
 
-
-print(20*'-' + 'End Q14' + 20*'-')
+print(20*'-' + 'End E1' + 20*'-')
 
 # =================================================================
-# Class_Ex15:
-#
 # ----------------------------------------------------------------
-print(20*'-' + 'Begin Q15' + 20*'-')
+print(20*'-' + 'Begin E2' + 20*'-')
 
 
 
@@ -264,4 +250,71 @@ print(20*'-' + 'Begin Q15' + 20*'-')
 
 
 
-print(20*'-' + 'End Q15' + 20*'-')
+print(20*'-' + 'End E2' + 20*'-')
+
+# =================================================================
+# ----------------------------------------------------------------
+print(20*'-' + 'Begin E3' + 20*'-')
+
+
+
+
+
+
+
+
+print(20*'-' + 'End E3' + 20*'-')
+
+# =================================================================
+# ----------------------------------------------------------------
+print(20*'-' + 'Begin E4' + 20*'-')
+
+
+
+
+
+
+
+
+print(20*'-' + 'End E4' + 20*'-')
+
+# =================================================================
+# ----------------------------------------------------------------
+print(20*'-' + 'Begin E5' + 20*'-')
+
+
+
+
+
+
+
+
+print(20*'-' + 'End E5' + 20*'-')
+
+# =================================================================
+# ----------------------------------------------------------------
+print(20*'-' + 'Begin E6' + 20*'-')
+
+
+
+
+
+
+
+
+print(20*'-' + 'End E6' + 20*'-')
+
+# =================================================================
+# ----------------------------------------------------------------
+print(20*'-' + 'Begin E7' + 20*'-')
+
+
+
+
+
+
+
+
+print(20*'-' + 'End E7' + 20*'-')
+
+# =================================================================
