@@ -224,12 +224,12 @@ print(20*'-' + 'End Q13' + 20*'-')
 # =================================================================
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin E1' + 20*'-')
-input = input()
+string = input()
 
-print(sum(map(str.isupper, input)))
-print(sum(map(str.islower, input)))
-print(sum(map(str.isnumeric, input)))
-print(map(str.count(" "), input))
+print(sum(map(str.isupper, string)))
+print(sum(map(str.islower, string)))
+print(sum(map(str.isnumeric, string)))
+#print(map(str.count(" "), input))
 
 
 
@@ -243,9 +243,9 @@ print(20*'-' + 'End E1' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin E2' + 20*'-')
 
-
-
-
+string = '12345'
+new_string = string[1:] + (string[0])
+print(new_string)
 
 
 
@@ -256,11 +256,12 @@ print(20*'-' + 'End E2' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin E3' + 20*'-')
 
-
-
-
-
-
+name = input()
+list = name.split()
+initials = []
+for i in range(len(list)):
+    initials.append(list[i][0])
+print(initials)
 
 
 print(20*'-' + 'End E3' + 20*'-')
