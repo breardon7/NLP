@@ -194,13 +194,12 @@ print(20*'-' + 'End Q11' + 20*'-')
 print(20*'-' + 'Begin Q12' + 20*'-')
 
 
-# This question is finished... causes error when rerun to create new files
-'''
+
 file = open('fileQ12.txt', 'w')
 file.write('This is the new message for question 12.')
 file.close()
 os.rename('fileQ12.txt', 'fileQ12_new.txt')
-'''
+
 print(20*'-' + 'End Q12' + 20*'-')
 # =================================================================
 # Class_Ex13:
@@ -270,11 +269,22 @@ print(20*'-' + 'End E3' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin E4' + 20*'-')
 
-
-
-
-
-
+length = lower = upper = digit = False
+password = input('Create new password: ')
+if len(password) >= 8:
+    length = True
+    for letter in password:
+        if letter.islower():
+            lower = True
+        elif letter.isupper():
+            upper = True
+        elif letter.isdigit():
+            digit = True
+if length and lower and upper and digit:
+    print('That is a valid password.')
+elif length or lower or upper or digit == False:
+    print('That password is not valid.')
+    password = input('Create new password: ')
 
 
 print(20*'-' + 'End E4' + 20*'-')
@@ -283,11 +293,17 @@ print(20*'-' + 'End E4' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin E5' + 20*'-')
 
-
-
-
-
-
+import operator
+dict = {}
+string = 'aaabbbbbbcccc'
+for i in string:
+    count = 0
+    for j in string:
+        if i == j:
+            count += 1
+    dict[i] = count
+sorted_dict = sorted(dict.items(), key=operator.itemgetter(1))
+print(sorted_dict)
 
 
 print(20*'-' + 'End E5' + 20*'-')
@@ -296,10 +312,10 @@ print(20*'-' + 'End E5' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin E6' + 20*'-')
 
+import itertools
 
-
-
-
+string = 'abc'
+print(map(''.join, itertools.product(*((x.lower(), x.upper()) for x in string))))
 
 
 
@@ -309,10 +325,13 @@ print(20*'-' + 'End E6' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin E7' + 20*'-')
 
-
-
-
-
+from collections import Counter
+text = open('test.txt' , 'w+', encoding='utf-8')
+text.write('this is a test/n test file/n question/n random words')
+print(next(text) for x in range(4))
+print([str(text).split()].sort())
+print(sum(1 for line in text))
+print(Counter(str(text).split()))
 
 
 
