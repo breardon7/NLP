@@ -25,11 +25,13 @@ print(20*'-' + 'End Q1' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q2' + 20*'-')
 
-
-
-
-
-
+# Code 1 normalizes the text prior to applying the set() function,
+# whereas code 2 does not. This means code 2 will create a set that might
+# contain distinct elements that only differ in lower/upper cases
+# (i.e. 'Hello' and 'hello' will both exist in the set), but code 1 will
+# prevent that by normalizing the case of each element prior to creating
+# a set. Code 2 will be larger and will most likely happen with other
+# texts when using these two lines of code.
 
 
 print(20*'-' + 'End Q2' + 20*'-')
