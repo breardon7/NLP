@@ -7,7 +7,7 @@
 # Explain the result of plot in a couple of sentences.
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q1' + 20*'-')
-
+import nltk
 
 
 
@@ -42,9 +42,10 @@ print(20*'-' + 'End Q2' + 20*'-')
 #
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q3' + 20*'-')
+from nltk.corpus import nps_chat
+from nltk import FreqDist
 
-
-
+nps_chat.posts()
 
 
 
@@ -80,6 +81,8 @@ print(20*'-' + 'End Q4' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q5' + 20*'-')
 
+#from nltk.corpus.reader import rea
+# print(state_union.words())
 
 
 
@@ -115,7 +118,9 @@ print(20*'-' + 'End Q6' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q7' + 20*'-')
 
-
+from nltk.corpus import wordnet as wn
+nouns = wn.all_synsets('n')
+print(nouns)
 
 
 
