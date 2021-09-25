@@ -7,11 +7,8 @@
 # Explain the result of plot in a couple of sentences.
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q1' + 20*'-')
-import nltk
-
-
-
-
+from nltk.book import text2
+text2.dispersion_plot(["Elinor", "Marianne", "Edward", "Willoughby"])
 
 print(20*'-' + 'End Q1' + 20*'-')
 
@@ -42,14 +39,11 @@ print(20*'-' + 'End Q2' + 20*'-')
 #
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q3' + 20*'-')
-from nltk.corpus import nps_chat
+from nltk.book import text5
 from nltk import FreqDist
-
-nps_chat.posts()
-
-
-
-
+four = [w for w in text5 if len(w) == 4]
+most = FreqDist(four).most_common(len(four))
+print(most)
 
 print(20*'-' + 'End Q3' + 20*'-')
 # =================================================================
@@ -62,14 +56,9 @@ print(20*'-' + 'End Q3' + 20*'-')
 # d. Having all lowercase letters except for an initial capital (i.e., titlecase)
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q4' + 20*'-')
-
-
-
-
-
-
-
-
+from nltk.book import text6
+ex4 = [w for w in text6 if w.endswith('ise') and 'z' in w and 'pt' in w and w.title()]
+print(ex4)
 
 print(20*'-' + 'End Q4' + 20*'-')
 # =================================================================
@@ -81,15 +70,10 @@ print(20*'-' + 'End Q4' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q5' + 20*'-')
 
-#from nltk.corpus.reader import rea
-# print(state_union.words())
-
-
-
-
-
-
-
+from nltk.corpus import state_union
+from nltk import ConditionalFreqDist
+cfd = ConditionalFreqDist((words, f[4:10]) for f in state_union.fileids() for w in state_union.words(f) for words in ['men', 'women', 'people'] if w.lower().startswith(words))
+cfd.plot()
 
 print(20*'-' + 'End Q5' + 20*'-')
 
@@ -101,12 +85,14 @@ print(20*'-' + 'End Q5' + 20*'-')
 #
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q6' + 20*'-')
-
-
-
-
-
-
+from nltk.corpus import cmudict
+from nltk import FreqDist
+entries = cmudict.entries()
+words = [w for w, p in entries]
+distinct = len(set(words))
+multi = len([k for (k,v) in FreqDist(words).items() if v > 1])/distinct
+print(distinct)
+print(multi)
 
 
 print(20*'-' + 'End Q6' + 20*'-')
@@ -118,12 +104,10 @@ print(20*'-' + 'End Q6' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q7' + 20*'-')
 
-from nltk.corpus import wordnet as wn
+'''from nltk.corpus import wordnet as wn
 nouns = wn.all_synsets('n')
-print(nouns)
-
-
-
+print(wn.synsets('motorcar'))
+'''
 
 
 
@@ -134,14 +118,12 @@ print(20*'-' + 'End Q7' + 20*'-')
 # USe at least 2 different method.
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q8' + 20*'-')
-
-
-
-
-
-
-
-
+from nltk.corpus import brown
+from collections import Counter
+three = [k for (k,v) in FreqDist(brown.words()).items() if v > 2]
+#print(three)
+#three = [w for w in set(brown.words()) if FreqDist(brown.words())[w]>2]
+#print(three)
 
 print(20*'-' + 'End Q8' + 20*'-')
 # =================================================================
@@ -151,17 +133,17 @@ print(20*'-' + 'End Q8' + 20*'-')
 # Did you find any strange word in the list? If yes investigate the cause?
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q9' + 20*'-')
+from nltk.corpus import gutenberg
+def most_freq_non_stop_words(text):
+    from nltk.corpus import stopwords
+    non_stopwords = [w for w in text if w not in stopwords.words('english')]
+    cleaned = [w.lower() for w in non_stopwords if w.isalnum()]
+    most_frequent = FreqDist(cleaned).most_common(50)
+    return most_frequent
 
-
-
-
-
-
-
-
-
-
-
+print(most_freq_non_stop_words(brown.words(categories='humor')))
+print(most_freq_non_stop_words(gutenberg.words('whitman-leaves.txt')))
+# I did not find any strange words in the text
 print(20*'-' + 'End Q9' + 20*'-')
 # =================================================================
 # Class_Ex10:
@@ -189,11 +171,13 @@ print(20*'-' + 'End Q10' + 20*'-')
 print(20*'-' + 'Begin Q11' + 20*'-')
 
 
+def utility(url):
+    from urllib import request
+    contents = request.urlopen(url).read().decode('utf8')
+    return contents
+print(utility('https://en.wikipedia.org/wiki/Data_science'))
 
-
-
-
-
+ 
 
 print(20*'-' + 'End Q11' + 20*'-')
 # =================================================================

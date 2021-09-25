@@ -1,5 +1,4 @@
-from nltk.book import *
-import nltk
+from nltk.book import text1
 
 print(text1.vocab())
 print(type(text1))
