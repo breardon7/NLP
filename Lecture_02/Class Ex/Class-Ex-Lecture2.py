@@ -103,11 +103,10 @@ print(20*'-' + 'End Q6' + 20*'-')
 #
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q7' + 20*'-')
-
-'''from nltk.corpus import wordnet as wn
-nouns = wn.all_synsets('n')
-print(wn.synsets('motorcar'))
-'''
+from nltk.corpus import wordnet as wn
+nouns = [n for n in wn.all_synsets('n') if len(n.hyponyms())==0]
+all_nouns = [n for n in wn.all_synsets('n')]
+print(len(nouns)/len(all_nouns))
 
 
 
@@ -122,8 +121,9 @@ from nltk.corpus import brown
 from collections import Counter
 three = [k for (k,v) in FreqDist(brown.words()).items() if v > 2]
 #print(three)
-#three = [w for w in set(brown.words()) if FreqDist(brown.words())[w]>2]
+three = [w for w in set(brown.words()) if FreqDist(brown.words())[w]>2]
 #print(three)
+
 
 print(20*'-' + 'End Q8' + 20*'-')
 # =================================================================
@@ -152,14 +152,9 @@ print(20*'-' + 'End Q9' + 20*'-')
 
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q10' + 20*'-')
-
-
-
-
-
-
-
-
+cfd = ConditionalFreqDist((genre,word)for genre in brown.categories() for word in brown.words(categories=genre))
+words = ['school', 'fun', 'hello', 'mom', 'dad', 'electric', 'sky']
+cfd.tabulate(conditions=brown.categories(), samples=words)
 
 print(20*'-' + 'End Q10' + 20*'-')
 # =================================================================
@@ -173,11 +168,13 @@ print(20*'-' + 'Begin Q11' + 20*'-')
 
 def utility(url):
     from urllib import request
-    contents = request.urlopen(url).read().decode('utf8')
-    return contents
+    from bs4 import BeautifulSoup
+    from nltk import word_tokenize
+    html = request.urlopen(url).read().decode('utf8')
+    raw = BeautifulSoup(html, 'html.parser').get_text()
+    tokens = word_tokenize(raw)
+    return tokens
 print(utility('https://en.wikipedia.org/wiki/Data_science'))
-
- 
 
 print(20*'-' + 'End Q11' + 20*'-')
 # =================================================================
@@ -190,15 +187,13 @@ print(20*'-' + 'End Q11' + 20*'-')
 # Note Use: Gutenberg('bryant-stories.txt')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q12' + 20*'-')
+from nltk import word_tokenize
+text = gutenberg.words('bryant-stories.txt')
+wh_words = ['who', 'what', 'where', 'when', 'why', 'which', 'whom', 'whose']
+wh_list = [w for w in text if w.lower() in wh_words]
+print(wh_list)
 
-
-
-
-
-
-
-
-
+# There are duplicates due to case distinctions
 
 print(20*'-' + 'End Q12' + 20*'-')
 # =================================================================
@@ -208,12 +203,14 @@ print(20*'-' + 'End Q12' + 20*'-')
 # Note use the following site https://darksky.net/forecast/40.7127,-74.0059/us12/en
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q13' + 20*'-')
-
-
-
-
-
-
+from urllib import request
+from bs4 import BeautifulSoup
+from nltk import sent_tokenize
+html = request.urlopen('darksky.net//forecast//40.7127,-74.0059//us12//en').read().decode('utf8')
+raw = BeautifulSoup(html, 'html.parser').get_text()
+text = sent_tokenize(raw)
+temp = [s for s in text if 'temperature' in s]
+print(temp)
 
 
 print(20*'-' + 'End Q13' + 20*'-')
@@ -224,17 +221,18 @@ print(20*'-' + 'End Q13' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q14' + 20*'-')
 
+from nltk import BigramTagger
+from nltk.corpus import treebank
+tagged = treebank.tagged_sents()
+ln =  int(0.9*len(tagged))
+train = tagged[:ln]
+test = tagged[ln:]
+bgt = BigramTagger(train=train)
+print('test results 2: ', bgt.evaluate(test))
+print('train results 2: ', bgt.evaluate(train))
 
-
-
-
-
-
-
-
-
-
-
+# The test results are much worse than the training data results.
+# This is most likely due to the tagger overfitting on the train data.
 
 print(20*'-' + 'End Q14' + 20*'-')
 
@@ -244,10 +242,7 @@ print(20*'-' + 'End Q14' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q15' + 20*'-')
 
-
-
-
-
+print(sorted(set(brown.words())))
 
 
 print(20*'-' + 'End Q15' + 20*'-')
@@ -258,9 +253,11 @@ print(20*'-' + 'End Q15' + 20*'-')
 # 1- Which nouns are more common in their plural form, rather than their singular form? (Only consider regular plurals, formed with the -s suffix.)
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q16' + 20*'-')
-
-
-
+cfd = ConditionalFreqDist(brown.tagged_words())
+conditions = cfd.conditions()
+for condition in conditions:
+	if cfd[condition]['NNS'] > cfd[condition]['NN']:
+		print(condition)
 
 
 print(20*'-' + 'End Q16' + 20*'-')
