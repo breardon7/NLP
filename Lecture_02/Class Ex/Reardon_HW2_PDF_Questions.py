@@ -66,15 +66,21 @@ def unknown(text):
     from nltk.corpus import words
     for word in text:
         if word in words.words():
-            text.replace(word, '')
+            text.remove(word)
     return text
-print(unknown(wiki_text))
+#print(unknown(wiki_text))
 # iv.
-
+novel_words = word_tokenize(open('twitter.txt', encoding='utf-8').read())
 # v
+from nltk import PorterStemmer
+ps = PorterStemmer()
+stemmed = [ps.stem(w) for w in novel_words]
+novel_stems = unknown(stemmed)
+print(novel_stems)
 # vi
-
-
+tagged_names = pos_tag(novel_stems)
+proper_names = [word for word,pos in tagged_names if pos == 'NNP']
+print(proper_names)
 # =================================================================
 # E.3
 # ----------------------------------------------------------------

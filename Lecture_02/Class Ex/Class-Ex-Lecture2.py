@@ -57,8 +57,10 @@ print(20*'-' + 'End Q3' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q4' + 20*'-')
 from nltk.book import text6
-ex4 = [w for w in text6 if w.endswith('ise') and 'z' in w and 'pt' in w and w.title()]
-print(ex4)
+ise = [w for w in text6 if w.endswith('ise') and 'z' in w and 'pt' in w and w.title()]
+z = [w for w in text6 if  'z' in w]
+pt = [w for w in text6 if 'pt' in w]
+title = [w for w in text6 if w.title()]
 
 print(20*'-' + 'End Q4' + 20*'-')
 # =================================================================
