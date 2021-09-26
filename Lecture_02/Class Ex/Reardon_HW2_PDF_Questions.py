@@ -52,9 +52,46 @@ print('5 most common tags: ', counts.most_common(5))
 # =================================================================
 # E.2
 # ----------------------------------------------------------------
+# i. & ii.
+def scrape_raw(url):
+    from urllib import request
+    from bs4 import BeautifulSoup
+    html = request.urlopen(url).read().decode('utf8')
+    raw = BeautifulSoup(html, 'html.parser').get_text()
+    return raw
+url = 'https://en.wikipedia.org/wiki/Benjamin_Franklin'
+wiki_text = [scrape_raw(url)]
+# iii.
+def unknown(text):
+    from nltk.corpus import words
+    for word in text:
+        if word in words.words():
+            text.replace(word, '')
+    return text
+print(unknown(wiki_text))
+# iv.
+
+# v
+# vi
 
 
 # =================================================================
 # E.3
 # ----------------------------------------------------------------
-
+# i.
+twitter = open('twitter.txt', 'r', encoding='utf-8')
+print(twitter.readline())
+print(twitter.readline())
+print(twitter.readline())
+# ii.
+twit_sent = twitter.read().split(sep='\n')
+# iii.
+twitter1 = open('twitter.txt', encoding='utf-8').read()
+tokens = word_tokenize(twitter1)
+# iv.
+train = twit_sent[:40000]
+test = twit_sent[40000:]
+print(len(twit_sent))
+# v.
+freq = FreqDist(tokens).most_common(len(tokens))
+print(freq)
