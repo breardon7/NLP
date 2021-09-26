@@ -106,7 +106,7 @@ print(20*'-' + 'Begin Q7' + 20*'-')
 from nltk.corpus import wordnet as wn
 nouns = [n for n in wn.all_synsets('n') if len(n.hyponyms())==0]
 all_nouns = [n for n in wn.all_synsets('n')]
-print(len(nouns)/len(all_nouns))
+print(len(nouns)/len(all_nouns)*100)
 
 
 
