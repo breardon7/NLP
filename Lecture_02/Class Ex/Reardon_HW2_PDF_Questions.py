@@ -10,11 +10,12 @@ print('token count: ', len(tokens))
 # iii.
 print('unique token count: ', len(set(tokens)))
 # iv
-'''from nltk.stem import WordNetLemmatizer
-verbs = [w for w in tokens if w.]
+from nltk.stem import WordNetLemmatizer
 wnl = WordNetLemmatizer()
-#print([wnl.lemmatize(t) for t in tokens])'''
+lemmatized = [wnl.lemmatize(w, 'v') for w in tokens]
+print(len(set(lemmatized)))
 # v.
+print('lexical diversity: ', len(tokens)/len(set(tokens)))
 # vi.
 whale = tokens.count('whale') + tokens.count('Whale')
 print('whale count: ', whale/len(tokens)*100)
@@ -27,11 +28,26 @@ gr_six = [w for w in tokens if len(w) > 6]
 freq_160 = [k for (k,v) in FreqDist(gr_six).items() if v > 160]
 print(freq_160)
 # ix.
-sorted = tokens.sort(key=len, reverse=True)
-print(sorted)
+longest = max(tokens, key=len)
+print(longest, len(longest))
 # x.
+freq_2000 = [(k,v) for (k,v) in FreqDist(gr_six).items() if v > 2000]
+print(freq_2000)
+# no words have a frequency of > 2000.
 # xi.
+from nltk import sent_tokenize
+raw_moby = open('moby.txt', 'r').read()
+sentences = sent_tokenize(raw_moby)
+avg = sum(map(len, sentences))/len(sentences)
+print('average token length per sentence: ', avg)
+
 # xii.
+from nltk import pos_tag
+from collections import Counter
+import itertools
+tags = pos_tag(tokens)
+counts = Counter(tag for word, tag in tags)
+print('5 most common tags: ', counts.most_common(5))
 
 # =================================================================
 # E.2
@@ -42,7 +58,3 @@ print(sorted)
 # E.3
 # ----------------------------------------------------------------
 
-
-# =================================================================
-# E.4
-# ----------------------------------------------------------------
