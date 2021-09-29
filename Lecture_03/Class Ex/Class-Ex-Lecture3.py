@@ -7,8 +7,13 @@
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q1' + 20*'-')
 
-
-
+import spacy
+nlp = spacy.load("en_core_web_sm")
+text = 'this is a test'
+doc = nlp(text)
+for token in doc:
+    print(token.text, token.lemma_, token.pos_, token.tag_, token.dep_,
+          token.shape_, token.is_alpha, token.is_stop)
 
 
 
