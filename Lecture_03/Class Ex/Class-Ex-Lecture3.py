@@ -184,7 +184,7 @@ print(20*'-' + 'End Q10' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q11' + 20*'-')
 
-import json
+'''import json
 file = open('countries.json',)
 countries = json.load(file)
 text = 'Czech Republic may help Slovakia protect its airspace'
@@ -192,11 +192,11 @@ doc = nlp(text)
 for token in doc:
     if token.pos_ == "PROPN":
         print(token.text)
-'''for token in doc:
+for token in doc:
     if token.text in countries:
         print(token)'''
 
-
+# need to get Czech and Republic together as single token
 
 
 print(20*'-' + 'End Q11' + 20*'-')
