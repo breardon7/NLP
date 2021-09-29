@@ -15,9 +15,6 @@ for token in doc:
     print(token.text, token.lemma_, token.pos_, token.tag_, token.dep_,
           token.shape_, token.is_alpha, token.is_stop)
 
-
-
-
 print(20*'-' + 'End Q1' + 20*'-')
 # =================================================================
 # Class_Ex2:
@@ -26,11 +23,12 @@ print(20*'-' + 'End Q1' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q2' + 20*'-')
 
-
-
-
-
-
+nlp = spacy.load("de_core_news_sm")
+text = 'Jeder hat das Recht auf Bildung. Die Bildung ist unentgeltlich, zum mindesten der Grundschulunterricht und die grundlegende Bildung.'
+doc = nlp(text)
+for token in doc:
+    print(token.text, token.lemma_, token.pos_, token.tag_, token.dep_,
+          token.shape_, token.is_alpha, token.is_stop)
 
 
 print(20*'-' + 'End Q2' + 20*'-')
@@ -40,13 +38,12 @@ print(20*'-' + 'End Q2' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q3' + 20*'-')
 
-
-
-
-
-
-
-
+import spacy
+nlp = spacy.load("en_core_web_sm")
+text = 'this is a test'
+doc = nlp(text)
+for token in doc:
+    print(token.text)
 
 print(20*'-' + 'End Q3' + 20*'-')
 # =================================================================
@@ -60,9 +57,16 @@ print(20*'-' + 'End Q3' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q4' + 20*'-')
 
+text = "In 2020, more than 15% of people in World got sick from a pandemic ( www.google.com ). Now it is less than 1% are. Reference ( www.yahoo.com )"
+doc = nlp(text)
+nums = [t.like_num for t in doc]
+nums_count = nums.count(True)
+print(nums_count/len(doc)*100)
 
-
-
+'''url = [t for t in doc if t.contains('www')]
+print(url)
+'''
+# Fix url portion
 
 
 
@@ -80,11 +84,11 @@ print(20*'-' + 'End Q4' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q5' + 20*'-')
 
-
-
-
-
-
+nlp = spacy.load("en_core_web_sm")
+text = "It is shown that: Google was not the first search engine in U.S. tec company. The value of google is 100 billion dollar"
+doc = nlp(text)
+for token in doc:
+    print(token.text, token.pos_, token.dep_)
 
 
 print(20*'-' + 'End Q5' + 20*'-')
@@ -96,12 +100,8 @@ print(20*'-' + 'End Q5' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q6' + 20*'-')
 
-
-
-
-
-
-
+for token in doc.ents:
+    print(token.text, token.label_)
 
 print(20*'-' + 'End Q6' + 20*'-')
 # =================================================================
@@ -112,14 +112,15 @@ print(20*'-' + 'End Q6' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q7' + 20*'-')
 
-
-
-
-
-
-
-
-
+text = 'Features of the iphone applications include a beautiful design, smart search, automatic labels and optional voice responses.'
+doc = nlp(text)
+for token in doc:
+    if token.pos_ == 'ADJ':
+        print(token.text, token.pos_)
+for token in doc:
+    if token.pos_ == 'NOUN':
+        print(token.text, token.pos_)
+        break
 print(20*'-' + 'End Q7' + 20*'-')
 # =================================================================
 # Class_Ex8:
@@ -129,11 +130,13 @@ print(20*'-' + 'End Q7' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q8' + 20*'-')
 
+'''from spacy.lookups import Lookups
+lookups = Lookups()
+text = 'I have a cat.'
+doc = nlp(text)
 
 
-
-
-
+'''
 
 
 print(20*'-' + 'End Q8' + 20*'-')
@@ -145,7 +148,8 @@ print(20*'-' + 'End Q8' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q9' + 20*'-')
 
-
+doc = nlp('Spacy is a nice toolkit.')
+print(doc.text, doc.doc, doc.ents, doc.vocab)
 
 
 
@@ -164,13 +168,11 @@ print(20*'-' + 'End Q9' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q10' + 20*'-')
 
-
-
-
-
-
-
-
+text = 'Newyork looks like a nice city.'
+doc = nlp(text)
+for token in doc:
+    if token.pos_ == 'PROPN' or token.pos_ == 'VERB':
+        print(token.text, token.pos_)
 
 print(20*'-' + 'End Q10' + 20*'-')
 # =================================================================
@@ -182,10 +184,17 @@ print(20*'-' + 'End Q10' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q11' + 20*'-')
 
-
-
-
-
+import json
+file = open('countries.json',)
+countries = json.load(file)
+text = 'Czech Republic may help Slovakia protect its airspace'
+doc = nlp(text)
+for token in doc:
+    if token.pos_ == "PROPN":
+        print(token.text)
+'''for token in doc:
+    if token.text in countries:
+        print(token)'''
 
 
 
