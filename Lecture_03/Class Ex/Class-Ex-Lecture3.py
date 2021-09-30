@@ -62,16 +62,9 @@ doc = nlp(text)
 nums = [t.like_num for t in doc]
 nums_count = nums.count(True)
 print(nums_count/len(doc)*100)
-
-'''url = [t for t in doc if t.contains('www')]
-print(url)
-'''
-# Fix url portion
-
-
-
-
-
+for token in doc:
+    if token.like_url:
+        print(token)
 
 print(20*'-' + 'End Q4' + 20*'-')
 # =================================================================
@@ -209,10 +202,7 @@ print(20*'-' + 'End Q11' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q12' + 20*'-')
 
-
-
-
-
+#from spacy.attrs import
 
 
 
@@ -225,14 +215,13 @@ print(20*'-' + 'End Q12' + 20*'-')
 # Process the texts and print the entities
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q13' + 20*'-')
-
-
-
-
-
-
-
-
+import json
+file = open('tweets.json',)
+tweets = json.load(file)
+for string in tweets:
+    doc = nlp(string)
+    for token in doc.ents:
+        print(token)
 
 print(20*'-' + 'End Q13' + 20*'-')
 # =================================================================
@@ -244,11 +233,21 @@ print(20*'-' + 'End Q13' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q14' + 20*'-')
 
+from spacy.lang.en import English
+nlp = English()
+tokenizer = nlp.tokenizer
+text = "Burger King is an American fast food restaurant chain"
+tokens = tokenizer(text)
+for token in tokens:
+    print(token)
 
-
-
-
-
+'''
+text = "Burger King is an American fast food restaurant chain"
+nlp = spacy.load("en_core_web_sm")
+doc = nlp(text)
+for token in doc:
+    print(token)
+'''
 
 print(20*'-' + 'End Q14' + 20*'-')
 
