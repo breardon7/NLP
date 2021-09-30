@@ -123,13 +123,11 @@ print(20*'-' + 'End Q7' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q8' + 20*'-')
 
-'''from spacy.lookups import Lookups
-lookups = Lookups()
-text = 'I have a cat.'
-doc = nlp(text)
-
-
-'''
+nlp = spacy.load('en_core_web_sm')
+nlp.vocab.strings.add('I have a cat.')
+cat_hash = nlp.vocab.strings['I have a cat.']
+cat_string = nlp.vocab.strings[cat_hash]
+print(cat_string)
 
 
 print(20*'-' + 'End Q8' + 20*'-')
@@ -169,7 +167,8 @@ print(20*'-' + 'End Q10' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q11' + 20*'-')
 
-'''import json
+print('---rule-based method---')
+import json
 file = open('countries.json',)
 countries = json.load(file)
 text = 'Czech Republic may help Slovakia protect its airspace'
@@ -177,11 +176,15 @@ doc = nlp(text)
 for token in doc:
     if token.pos_ == "PROPN":
         print(token.text)
-for token in doc:
-    if token.text in countries:
-        print(token)'''
-
-# need to get Czech and Republic together as single token
+        
+print('---statistical method---')
+import json
+file = open('countries.json',)
+countries = json.load(file)
+text = 'Czech Republic may help Slovakia protect its airspace'
+doc = nlp(text)
+for ent in doc.ents:
+    print(ent.text)
 
 
 print(20*'-' + 'End Q11' + 20*'-')
