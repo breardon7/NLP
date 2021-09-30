@@ -176,7 +176,7 @@ doc = nlp(text)
 for token in doc:
     if token.pos_ == "PROPN":
         print(token.text)
-        
+
 print('---statistical method---')
 import json
 file = open('countries.json',)
@@ -197,11 +197,19 @@ print(20*'-' + 'End Q11' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q12' + 20*'-')
 
-#from spacy.attrs import
+from spacy.tokens import Token
+import spacy
+nlp = spacy.load("en_core_web_sm")
 
+def get_reversed_token(token):
+    token = str(token)
+    reversed = token[::-1]
+    return reversed
+Token.set_extension('reversed', getter=get_reversed_token)
 
-
-
+doc = nlp('Reverse this text')
+for token in doc:
+    print(token.text, '--', token._.reversed)
 
 print(20*'-' + 'End Q12' + 20*'-')
 # =================================================================
