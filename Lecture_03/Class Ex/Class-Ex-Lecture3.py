@@ -144,20 +144,12 @@ print(20*'-' + 'Begin Q9' + 20*'-')
 doc = nlp('Spacy is a nice toolkit.')
 print(doc.text, doc.doc, doc.ents, doc.vocab)
 
-
-
-
-
-
-
 print(20*'-' + 'End Q9' + 20*'-')
 # =================================================================
 # Class_Ex10:
 # Use spacy and process the following text.
 # Newyork looks like a nice city.
 # Find which token is proper noun and which one is a verb.
-#
-
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q10' + 20*'-')
 
@@ -240,14 +232,6 @@ text = "Burger King is an American fast food restaurant chain"
 tokens = tokenizer(text)
 for token in tokens:
     print(token)
-
-'''
-text = "Burger King is an American fast food restaurant chain"
-nlp = spacy.load("en_core_web_sm")
-doc = nlp(text)
-for token in doc:
-    print(token)
-'''
 
 print(20*'-' + 'End Q14' + 20*'-')
 
