@@ -172,10 +172,10 @@ import json
 file = open('countries.json',)
 countries = json.load(file)
 text = 'Czech Republic may help Slovakia protect its airspace'
-doc = nlp(text)
-for token in doc:
-    if token.pos_ == "PROPN":
-        print(token.text)
+list = text.split(sep=' ')
+for word in list:
+    if word in countries:
+        print(word)
 
 print('---statistical method---')
 import json
@@ -236,9 +236,9 @@ print(20*'-' + 'End Q13' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q14' + 20*'-')
 
-from spacy.lang.en import English
-nlp = English()
-tokenizer = nlp.tokenizer
+nlp = spacy.load("en_core_web_sm")
+with nlp.disable_pipes("tagger", "parser"):
+    tokenizer = nlp.tokenizer
 text = "Burger King is an American fast food restaurant chain"
 tokens = tokenizer(text)
 for token in tokens:

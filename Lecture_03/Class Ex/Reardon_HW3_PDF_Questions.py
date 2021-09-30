@@ -39,6 +39,7 @@ for token in doc:
 # vi.
 
 # E.2
+# redacted means fill Names with character (i.e Josh ---> ****)
 # i.
 # ii.
 # iii.
