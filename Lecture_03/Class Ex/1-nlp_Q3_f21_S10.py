@@ -1,6 +1,5 @@
 # ------------------Import Library----------------------------
 import spacy
-import pandas as pd
 
 
 #-------------------Load dataset and Tokenize------------------------------
@@ -43,7 +42,6 @@ for token in doc:
 # ----------------Document Similarities between ech sentences----------------------
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
 text2 = open('data1.txt', 'r').read()
 
 doc = nlp(text2)
@@ -57,9 +55,16 @@ for sent in doc.sents:
     list2.append(list1)
 sim_array = np.array(list2)
 print(sim_array)
-print(list2)
 
-sns.set(font_scale = 4)
-plt.figure(figsize=(100,75))
-sns.heatmap(sim_array)
+fig, ax = plt.subplots()
+im = ax.imshow(sim_array)
+
+ax.set_title("Sentence Similarity")
+fig.tight_layout()
 plt.show()
+
+# The heatmap is a bit difficult to read given the scale, but the yellow diagonal line represents
+# the projection of a sentence onto itself, scoring a 1 which is the highest similarity score. This
+# indicates that lighter cells equal a higher score in the plot, and darker equals a lower score.
+# Based on that info, it seems most sentences have a relatively high similarity with one another,
+# except the following sentences: 18, 51, 54.
