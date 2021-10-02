@@ -54,7 +54,14 @@ doc = nlp(text)
 for ent in doc.ents:
     print(ent.text, ent.label_)
 # iii.
-
+text = df['text'][15]
+doc = nlp(text)
+print('----------------redacted start----------------')
+for ent in doc.ents:
+    if ent.label_ == 'PERSON':
+        df['text'][15] = df['text'][15].replace(str(ent), '[REDACTED]')
+print(df['text'][15])
+print('----------------redacted end----------------')
 # E.2
 # i.
 text = 'This is a test sentence.'
