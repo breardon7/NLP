@@ -111,12 +111,13 @@ print(20*'-' + 'End Q5' + 20*'-')
 # USe sub method
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q6' + 20*'-')
-
-
-
-
-
-
+import re
+string = '$$%$%32u34h9&*Y*&H9h3294hr&*&****'
+print(string)
+for i in string:
+    if i.isalnum() == False:
+        string = re.sub(i, '', string)
+print(string)
 
 
 
@@ -127,7 +128,7 @@ print(20*'-' + 'End Q6' + 20*'-')
 # https://en.wikipedia.org/wiki/Natural_language_processing
 # Find the tag which related to the text. Extract all the textual data.
 # Tokenize the cleaned text file.
-# print the len of the corpus and pint couple of th esenetences.
+# print the len of the corpus and pint couple of the sentences.
 # Calculate the words frequencies.
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q7' + 20*'-')
