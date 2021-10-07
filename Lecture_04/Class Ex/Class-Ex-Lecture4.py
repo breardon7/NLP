@@ -4,12 +4,16 @@
 # (all chars lower and upper case with all digits).
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q1' + 20*'-')
+text = 'This is a test string 123^&#@*98'
 
+def all(text):
+    import re
+    pattern = re.compile(r'\w')
+    matches = pattern.finditer(text)
+    for match in matches:
+        print(match)
 
-
-
-
-
+print(all(text))
 
 
 
@@ -22,14 +26,19 @@ print(20*'-' + 'End Q1' + 20*'-')
 # Sample String 'ac', 'abc', abbc'
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q2' + 20*'-')
+s1 = 'ac'
+s2 = 'abc'
+s3 = 'abbc'
+def zero_or_more_b(text):
+    import re
+    pattern = re.compile(r'^ab*')
+    matches = pattern.finditer(text)
+    for match in matches:
+        print(match)
 
-
-
-
-
-
-
-
+print(zero_or_more_b(s1))
+print(zero_or_more_b(s2))
+print(zero_or_more_b(s3))
 
 
 print(20*'-' + 'End Q2' + 20*'-')
@@ -41,12 +50,15 @@ print(20*'-' + 'End Q2' + 20*'-')
 print(20*'-' + 'Begin Q3' + 20*'-')
 
 
+s1 = '1iu2hd1872y817239848921309'
+def zero_or_more_b(text):
+    import re
+    pattern = re.compile(r'[1-3]')
+    matches = pattern.finditer(text)
+    for match in matches:
+        print(match)
 
-
-
-
-
-
+print(zero_or_more_b(s1))
 
 print(20*'-' + 'End Q3' + 20*'-')
 # =================================================================
@@ -55,13 +67,16 @@ print(20*'-' + 'End Q3' + 20*'-')
 # text = 'Python exercises, JAVA exercises, C exercises'
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q4' + 20*'-')
+text = 'Python exercises, JAVA exercises, C exercises'
+def find_substring(text, substring):
+    import re
+    pattern = re.compile(f'{substring}')
+    matches = pattern.finditer(text)
+    for match in matches:
+        print(match)
 
-
-
-
-
-
-
+print(find_substring(text, 'Python'))
+print(find_substring(text, 'JAVA'))
 
 
 print(20*'-' + 'End Q4' + 20*'-')
@@ -71,10 +86,21 @@ print(20*'-' + 'End Q4' + 20*'-')
 # words = ["Cython CHP", "Java JavaScript", "PERL S+"]
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q5' + 20*'-')
+list = ["Cython CHP", "Java JavaScript", "PERL S+"]
+def two_c(list):
+    import re
+    count = 0
+    for string in list:
+        pattern = re.compile(r'^C')
+        matches = pattern.finditer(string)
+        for match in matches:
+            count += 1
+    if count > 1:
+        print('True')
+    else:
+        print('False')
 
-
-
-
+print(two_c(list))
 
 
 
