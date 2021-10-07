@@ -24,16 +24,19 @@ pattern = re.compile(r'[A-Z][a-zA-Z]+ski')
 matches = pattern.finditer(text)
 list = []
 for match in matches:
-    list += [match[0]]
-print(Counter(list))
+    print(match)
 
 # iii
-
+list = []
+for match in matches:
+    list += [match[0]]
+print(Counter(list))
 
 print(20*'-' + 'End E2' + 20*'-')
 print(20*'-' + 'Begin E3' + 20*'-')
 
 # i
+
 # ii
 # iii
 # iv
