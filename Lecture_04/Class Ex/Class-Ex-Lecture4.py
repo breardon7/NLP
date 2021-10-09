@@ -5,16 +5,21 @@
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q1' + 20*'-')
 text = 'This is a test string 123^&#@*98'
-
-def all(text):
+string = 'Teststring123'
+def check_string(text):
     import re
     pattern = re.compile(r'\w')
     matches = pattern.finditer(text)
-    for match in matches:
-        print(match)
+    count = 0
+    for i in matches:
+        count += 1
+    if count == len(text):
+        print('String is valid')
+    else:
+        print('String is not valid')
 
-print(all(text))
-
+print(check_string(text))
+print(check_string(string))
 
 
 
@@ -157,15 +162,14 @@ print(20*'-' + 'End Q7' + 20*'-')
 # Class_Ex8:
 # Grab any text from Wikipedia and create a string of 3 sentences.
 # Use that string and calculate the ngram of 1 from nltk package.
-# Use BOW method and compare the most 3 common owrds.
+# Use BOW method and compare the most 3 common words.
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q8' + 20*'-')
 
-
-
-
-
-
+string = ''
+for i in sents[10:13]:
+    string += sents[i]
+print(string)
 
 
 
