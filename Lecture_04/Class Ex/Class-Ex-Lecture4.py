@@ -113,11 +113,9 @@ print(20*'-' + 'End Q5' + 20*'-')
 print(20*'-' + 'Begin Q6' + 20*'-')
 import re
 string = '$$%$%32u34h9&*Y*&H9h3294hr&*&****'
+cleaned = re.sub(r'[^a-zA-Z0-9]', '', string)
 print(string)
-for i in string:
-    if i.isalnum() == False:
-        string = re.sub(i, '', string)
-print(string)
+print(cleaned)
 
 
 
@@ -132,14 +130,27 @@ print(20*'-' + 'End Q6' + 20*'-')
 # Calculate the words frequencies.
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q7' + 20*'-')
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 
+from urllib import request
+from bs4 import BeautifulSoup
+from nltk import sent_tokenize
+from nltk import word_tokenize
+from collections import Counter
+html = request.urlopen('https://en.wikipedia.org/wiki/Natural_language_processing').read().decode('utf8')
+raw = BeautifulSoup(html, 'html.parser').get_text()
+tokens = word_tokenize(raw)
+sents = sent_tokenize(raw)
 
+print(len(tokens))
+for i in range(3):
+    print(sents[i])
 
+counts = Counter(tokens)
 
-
-
-
-
+for i in tokens:
+    print(i, ':', counts[i]/len(tokens))
 
 print(20*'-' + 'End Q7' + 20*'-')
 # =================================================================
