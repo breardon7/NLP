@@ -38,6 +38,14 @@ print(20*'-' + 'Begin E3' + 20*'-')
 # i
 
 # ii
+text = 'random string 234#$ (hello)'
+print(text)
+pattern = re.compile(r'\([a-zA-Z0-9]+\)')
+matches = pattern.finditer(text)
+for match in matches:
+    length = len(match[0])-2
+    text = re.sub(r'\([a-zA-Z0-9]+\)', '('+'x'*length+')', text)
+print(text)
 # iii
 # iv
 # v

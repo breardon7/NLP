@@ -165,15 +165,15 @@ print(20*'-' + 'End Q7' + 20*'-')
 # Use BOW method and compare the most 3 common words.
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q8' + 20*'-')
-
+from nltk import ngrams
+from nltk import word_tokenize
+from nltk import FreqDist
 string = ''
 for i in sents[10:13]:
-    string += sents[i]
-print(string)
-
-
-
-
+    string += i
+tokens = word_tokenize(string)
+onegram = FreqDist([gram for gram in ngrams(tokens, 1)]).most_common(3)
+print(onegram)
 
 print(20*'-' + 'End Q8' + 20*'-')
 # =================================================================
@@ -188,7 +188,9 @@ print(20*'-' + 'End Q8' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q9' + 20*'-')
 
-
+from sklearn.datasets import fetch_20newsgroups
+print(fetch_20newsgroups)
+'''def function(text):'''
 
 
 
@@ -213,11 +215,29 @@ print(20*'-' + 'End Q9' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q10' + 20*'-')
 
+text = "The eastern brown snake (Pseudonaja textilis) is a highly venomous snake of the family Elapidae, native to eastern and central Australia and southern New Guinea. Up to 2.4 metres (7.9 ft) long with a slender build, it has variable upperparts, pale brown to almost black, and a pale cream-yellow underside, often with orange or grey splotches. It was first described by André Marie Constant Duméril in 1854. The eastern brown snake is found in many habitats, though not in dense forests. It has become more common in farmland and on the outskirts of urban areas, preying mainly on the introduced house mouse. It is considered the world's second-most venomous land snake after the inland taipan, based on the toxicity of its venom in mice. According to one study, as a genus, brown snakes were responsible for 15 of 19 snakebite fatalities in Australia between 2005 and 2015."
 
+from nltk import word_tokenize
+from nltk.corpus import stopwords
+from collections import Counter
+stop_words = stopwords.words('english')
+tokens = word_tokenize(text)
+non_stopwords = [w for w in tokens if w not in stopwords.words('english')]
+cleaned = [w.lower() for w in non_stopwords if w.isalnum()]
+unique_words = len(set(cleaned))
+print('Unique words: ', unique_words)
+def tf(text, token):
+    tf = {}
+    total_count = len(text)
+    counts = Counter(text)
+    dict[token] = counts[token]/total_count
+    return tf
 
+print(tf(cleaned, 'snake'))
+print(tf(cleaned, 'brown'))
 
-
-
+def idf(text, token, num_docs):
+    idf = {}
 
 
 
