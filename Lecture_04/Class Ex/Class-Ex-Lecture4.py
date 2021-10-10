@@ -189,7 +189,6 @@ print(20*'-' + 'End Q8' + 20*'-')
 print(20*'-' + 'Begin Q9' + 20*'-')
 
 from sklearn.datasets import fetch_20newsgroups
-print(fetch_20newsgroups)
 '''def function(text):'''
 
 
