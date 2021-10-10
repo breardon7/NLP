@@ -216,31 +216,37 @@ print(20*'-' + 'End Q9' + 20*'-')
 print(20*'-' + 'Begin Q10' + 20*'-')
 
 text = "The eastern brown snake (Pseudonaja textilis) is a highly venomous snake of the family Elapidae, native to eastern and central Australia and southern New Guinea. Up to 2.4 metres (7.9 ft) long with a slender build, it has variable upperparts, pale brown to almost black, and a pale cream-yellow underside, often with orange or grey splotches. It was first described by André Marie Constant Duméril in 1854. The eastern brown snake is found in many habitats, though not in dense forests. It has become more common in farmland and on the outskirts of urban areas, preying mainly on the introduced house mouse. It is considered the world's second-most venomous land snake after the inland taipan, based on the toxicity of its venom in mice. According to one study, as a genus, brown snakes were responsible for 15 of 19 snakebite fatalities in Australia between 2005 and 2015."
-
 from nltk import word_tokenize
+from nltk import sent_tokenize
 from nltk.corpus import stopwords
 from collections import Counter
 stop_words = stopwords.words('english')
 tokens = word_tokenize(text)
+docs = sent_tokenize(text)
 non_stopwords = [w for w in tokens if w not in stopwords.words('english')]
 cleaned = [w.lower() for w in non_stopwords if w.isalnum()]
 unique_words = len(set(cleaned))
 print('Unique words: ', unique_words)
 def tf(text, token):
-    tf = {}
     total_count = len(text)
     counts = Counter(text)
-    dict[token] = counts[token]/total_count
+    tf = counts[token]/total_count
     return tf
 
-print(tf(cleaned, 'snake'))
-print(tf(cleaned, 'brown'))
+def idf(docs, token):
+    import numpy as np
+    num_docs_containing = 1
+    num_docs = len(docs)
+    for doc in docs:
+        if token in doc:
+            num_docs_containing += 1
+    idf = np.log(num_docs/num_docs_containing)
+    return idf
 
-def idf(text, token, num_docs):
-    idf = {}
 
-
-
+for token in cleaned:
+    for doc in docs:
+        print(token, '// Doc #', docs.index(doc), ': ', tf(cleaned, str(token)) * idf(doc, str(token)))
 
 print(20*'-' + 'End Q10' + 20*'-')
 # =================================================================
@@ -256,13 +262,19 @@ print(20*'-' + 'End Q10' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q11' + 20*'-')
 
+text = "The eastern brown snake (Pseudonaja textilis) is a highly venomous snake of the family Elapidae, native to eastern and central Australia and southern New Guinea. Up to 2.4 metres (7.9 ft) long with a slender build, it has variable upperparts, pale brown to almost black, and a pale cream-yellow underside, often with orange or grey splotches. It was first described by André Marie Constant Duméril in 1854. The eastern brown snake is found in many habitats, though not in dense forests. It has become more common in farmland and on the outskirts of urban areas, preying mainly on the introduced house mouse. It is considered the world's second-most venomous land snake after the inland taipan, based on the toxicity of its venom in mice. According to one study, as a genus, brown snakes were responsible for 15 of 19 snakebite fatalities in Australia between 2005 and 2015."
 
+stopwords = ['and', 'for', 'in', 'little', 'of', 'the', 'to',]
+ignore_chars = ['!','@','#,''$','%','^','&','*','(',')','_','-','+','=',':',';',',','.','<','>','/','?','`','~','|','"']
+'''
+class LSA:
+    def __init__(self):
+    def tokenize(self):
+        stopwords = ['and', 'for', 'in', 'little', 'of', 'the', 'to', ]
+        ignore_chars = ['!', '@', '#,''$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '=', ':', ';', ',', '.', '<', '>', '/', '?', '`', '~', '|', '"']
+        tokens = [token for token in ]
 
-
-
-
-
-
+'''
 
 print(20*'-' + 'End Q11' + 20*'-')
 # =================================================================
@@ -283,40 +295,6 @@ print(20*'-' + 'Begin Q12' + 20*'-')
 
 
 print(20*'-' + 'End Q12' + 20*'-')
-# =================================================================
-# Class_Ex13:
-#
-# ----------------------------------------------------------------
-print(20*'-' + 'Begin Q13' + 20*'-')
-
-
-
-
-
-
-
-
-
-print(20*'-' + 'End Q13' + 20*'-')
-# =================================================================
-# Class_Ex14:
-#
-
-# ----------------------------------------------------------------
-print(20*'-' + 'Begin Q14' + 20*'-')
-
-
-
-
-
-
-
-
-
-print(20*'-' + 'End Q14' + 20*'-')
-
-# =================================================================
-
 
 
 

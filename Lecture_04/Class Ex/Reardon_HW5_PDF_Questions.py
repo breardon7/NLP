@@ -64,5 +64,7 @@ print(re.findall(r'\b\w{3,5}\b', text))
 text = 'dfgjn,sdf,sdf'
 print(re.sub(r',', '-', text))
 # vii
+url = 'https://www.yahoo.com/news/football/wew/2021/09/02/odell–famer-rrrr-on-one-tr-littleball–norman-stupid-author/'
+print(re.findall(r'\d{4}/\d{2}/\d{2}', url))
 
 print(20*'-' + 'End E3' + 20*'-')
