@@ -4,7 +4,10 @@
 # Find the conditional probability of Char given the Occurrence.
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q1' + 20*'-')
-
+import pandas as pd
+df = pd.read_csv('data.csv')
+print(df.head())
+print(df.columns)
 
 
 
@@ -48,10 +51,16 @@ print(20*'-' + 'End Q2' + 20*'-')
 # 4- Explain your results very carefully.
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q3' + 20*'-')
-
-
-
-
+from nltk import word_tokenize
+from nltk.corpus import stopwords
+df = pd.read_csv('data.csv')
+for row in df['text']:
+    tokens = word_tokenize(row)
+    no_stop_words = [token for token in tokens if token not in stopwords.words('english')]
+    cleaned = [token.lower() for token in no_stop_words if token.isalnum()]
+    cleaned_string = ' '.join(cleaned)
+    df['cleaned_text'] = cleaned_string
+print(df.head())
 
 
 
