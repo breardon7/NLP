@@ -53,15 +53,22 @@ print(20*'-' + 'End Q2' + 20*'-')
 print(20*'-' + 'Begin Q3' + 20*'-')
 from nltk import word_tokenize
 from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+from sklearn.feature_extraction.text import TfidfVectorizer
 df = pd.read_csv('data.csv')
-for row in df['text']:
-    tokens = word_tokenize(row)
-    no_stop_words = [token for token in tokens if token not in stopwords.words('english')]
-    cleaned = [token.lower() for token in no_stop_words if token.isalnum()]
-    cleaned_string = ' '.join(cleaned)
-    df['cleaned_text'] = cleaned_string
+df['cleaned_text'] = ''
+#df['vectorized'] =
+ps = PorterStemmer()
+for i in range(len(df['text'])):
+    tokens = word_tokenize(df['text'][i])
+    lower = [token.lower() for token in tokens if token.isalnum()]
+    no_stop_words = [token for token in lower if token not in stopwords.words('english')]
+    stemmed = [ps.stem(token) for token in no_stop_words]
+    cleaned_string = ' '.join(stemmed)
+    df['cleaned_text'][i] = cleaned_string
+corpus = [row for row in df['cleaned_text']]
+print(corpus)
 print(df.head())
-
 
 
 
