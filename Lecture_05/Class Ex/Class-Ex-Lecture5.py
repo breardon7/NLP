@@ -94,14 +94,6 @@ predicted = clf.predict(X_test)
 print(metrics.classification_report(y_test, predicted))
 print(metrics.confusion_matrix(y_test, predicted))
 
-# Exam code
-'''
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
-clf = MultinomialNB()
-clf.fit(X_train,y_train)
-
-df_test['labels'] = clf.predict(insert df_test vectorized data)'''
-#df_test.to_csv(r'C:\Users\brear\OneDrive\Desktop\NLP\Exam1\HW5_Test_Output')
 
 
 
