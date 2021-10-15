@@ -8,7 +8,7 @@ import pandas as pd
 df = pd.read_csv('data.csv')
 print(df.head())
 print(df.columns)
-
+# P(Char|Occ) = (P(Occ|Char)*P(Char))/P(Occ)
 
 
 
@@ -51,7 +51,7 @@ print(20*'-' + 'End Q2' + 20*'-')
 # 4- Explain your results very carefully.
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q3' + 20*'-')
-# import packages
+'''# import packages
 from nltk import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
@@ -91,18 +91,16 @@ clf.fit(X_train,y_train)
 predicted = clf.predict(X_test)
 
 # Classification report
+print('----------------Naive Bayes----------------')
 print(metrics.classification_report(y_test, predicted))
 print(metrics.confusion_matrix(y_test, predicted))
-
-# Exam code
 '''
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
-clf = MultinomialNB()
-clf.fit(X_train,y_train)
-
-df_test['labels'] = clf.predict(insert df_test vectorized data)'''
-#df_test.to_csv(r'C:\Users\brear\OneDrive\Desktop\NLP\Exam1\HW5_Test_Output')
-
+# Results
+#Given the F1 scores of 0.83 and 0.80 for lable 1 and label 2 respectively,
+# we can assume that the model will classify unseen data fairly well. The model
+# causes more false positives for label 1 than label 2 given that label 1 has
+# a lower precision, but causes more false negatives for label 2 given that label
+# 2 has a lower recall than label 1.
 
 
 print(20*'-' + 'End Q3' + 20*'-')
@@ -138,13 +136,14 @@ print(20*'-' + 'End Q4' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q5' + 20*'-')
 
+list1 = [1,2,3,4,5]
+list2 = [1,2,3,5,4]
+acc_perc = sum(1 for x,y in zip(list1,list2) if x == y) / len(list1)
+print('Accuracy Percentage: ', acc_perc)
 
-
-
-
-
-
-
+'''
+# create confusion matrix
+'''
 
 
 print(20*'-' + 'End Q5' + 20*'-')
@@ -164,8 +163,62 @@ print(20*'-' + 'End Q5' + 20*'-')
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q6' + 20*'-')
 
+from nltk import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.decomposition import TruncatedSVD
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
 
+# read in data
+df = pd.read_csv('data.csv')
+df['cleaned_text'] = ''
+vc = TfidfVectorizer()
+ps = PorterStemmer()
 
+# preprocess text data
+for i in range(len(df['text'])):
+    tokens = word_tokenize(df['text'][i])
+    lower = [token.lower() for token in tokens if token.isalnum()]
+    no_stop_words = [token for token in lower if token not in stopwords.words('english')]
+    stemmed = [ps.stem(token) for token in no_stop_words]
+    cleaned_string = ' '.join(stemmed)
+    df['cleaned_text'][i] = cleaned_string
+
+# Vectorize text data
+corpus = [row for row in df['cleaned_text']]
+vectorized_data = vc.fit_transform(corpus)
+#print(vectorized_data.shape)
+
+# Create train set
+X = vectorized_data
+y = df['label']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
+clf = LogisticRegression()
+clf.fit(X_train,y_train)
+
+# Test on test set
+predicted = clf.predict(X_test)
+
+# Classification report
+print('----------------Logistic Regression----------------')
+print(metrics.classification_report(y_test, predicted))
+print(metrics.confusion_matrix(y_test, predicted))
+
+'''
+lsa = TruncatedSVD(n_components=2,n_iter=100)
+lsa.fit(X_train,y_train)
+
+# Test on test set
+predicted = lsa.predict(X_test)
+
+# Classification report
+print('----------------LSA----------------')
+print(metrics.classification_report(y_test, predicted))
+print(metrics.confusion_matrix(y_test, predicted))
+'''
 
 
 
@@ -189,143 +242,6 @@ print(20*'-' + 'End Q6' + 20*'-')
 # from nltk.corpus import movie_reviews
 # ----------------------------------------------------------------
 print(20*'-' + 'Begin Q7' + 20*'-')
-
-
-
-
-
-
-
-
-
-
-
-
-print(20*'-' + 'End Q7' + 20*'-')
-
-# =================================================================
-# Class_Ex8:
-#
-# ----------------------------------------------------------------
-print(20*'-' + 'Begin Q8' + 20*'-')
-
-
-
-
-
-
-
-
-
-
-print(20*'-' + 'End Q8' + 20*'-')
-# =================================================================
-# Class_Ex9:
-#
-# ----------------------------------------------------------------
-print(20*'-' + 'Begin Q9' + 20*'-')
-
-
-
-
-
-
-
-
-
-
-print(20*'-' + 'End Q9' + 20*'-')
-# =================================================================
-# Class_Ex10:
-#
-# ----------------------------------------------------------------
-print(20*'-' + 'Begin Q10' + 20*'-')
-
-
-
-
-
-
-
-
-
-
-
-print(20*'-' + 'End Q10' + 20*'-')
-# =================================================================
-# Class_Ex11:
-#
-# ----------------------------------------------------------------
-print(20*'-' + 'Begin Q11' + 20*'-')
-
-
-
-
-
-
-
-
-
-
-
-print(20*'-' + 'End Q11' + 20*'-')
-# =================================================================
-# Class_Ex12:
-#
-# ----------------------------------------------------------------
-print(20*'-' + 'Begin Q12' + 20*'-')
-
-
-
-
-
-
-
-
-
-
-
-
-print(20*'-' + 'End Q12' + 20*'-')
-# =================================================================
-# Class_Ex13:
-#
-# ----------------------------------------------------------------
-print(20*'-' + 'Begin Q13' + 20*'-')
-
-
-
-
-
-
-
-
-
-print(20*'-' + 'End Q13' + 20*'-')
-# =================================================================
-# Class_Ex14:
-#
-
-# ----------------------------------------------------------------
-print(20*'-' + 'Begin Q14' + 20*'-')
-
-
-
-
-
-
-
-
-
-print(20*'-' + 'End Q14' + 20*'-')
-
-# =================================================================
-
-
-
-
-
-
 
 
 
