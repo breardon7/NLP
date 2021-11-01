@@ -3,9 +3,9 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="339a4390-b42d-4322-a3cf-5cb014640f44" name="AWS">
-        <fileTransfer accessType="SFTP" host="34.205.159.20" port="22" sshConfigId="5e769515-4150-4dc5-a39d-f32a6aef1024" sshConfig="ubuntu@34.205.159.20:22 key" keyPair="true">
+        <fileTransfer accessType="SFTP" sshConfigId="5e769515-4150-4dc5-a39d-f32a6aef1024" sshConfig="ubuntu@34.205.159.20:22 key">
           <advancedOptions>
-            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
         </fileTransfer>
       </webServer>

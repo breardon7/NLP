@@ -42,7 +42,7 @@ from nltk.corpus import stopwords
 import re
 tokens = word_tokenize(text)
 for token in tokens:
-    token = re.sub('[^A-Za-z0-9]+', '', token)
+    token = re.sub('[^A-Za-z0-9]', '', token)
 tokens = [token.lower() for token in tokens if token not in stopwords.words('english')]
 print(len(tokens))
 
@@ -52,20 +52,22 @@ print(len(tokens))
 # Q4:
 # Normalize text to its root use nltk package.
 
-
-
-
-
-
-
-
-
+from nltk.stem import WordNetLemmatizer
+lm = WordNetLemmatizer()
+lemmed = [lm.lemmatize(token) for token in tokens]
+print(lemmed)
 #**********************************
 # Q5:
 # Used the stemmed tokenized set and calculate the TFIDF
 # used the LSA method and find try to categorize the terms into 2 context. Just use 10 terms in LSA (restrict LSA to use the 10 terms).
 
+from sklearn.feature_extraction.text import TfidfVectorizer
+vectorizer = TfidfVectorizer()
+X = vectorizer.fit_transform(lemmed)
 
+from sklearn.decomposition import TruncatedSVD
+lsa = TruncatedSVD(n_components=2,n_iter=100)
+lsa.fit(X)
 
 
 
