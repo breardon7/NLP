@@ -85,8 +85,8 @@ def ppn(p,t):
     y = m*x + b
     plt.plot(x,y)
     plt.arrow(2.4, 3, w[0], w[1], head_width = .2)
-    plt.xlabel('weight of animal')
-    plt.ylabel('ear length')
+    plt.xlabel('x')
+    plt.ylabel('y')
     plt.title('Hardlim')
     plt.show()
 
