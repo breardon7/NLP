@@ -31,7 +31,8 @@ for row in inputs:
             vector.append(1)
         else:
             vector.append(0)
-    X.append(np.array(vector))
+    X.append(vector)
+X = np.array(X)
 print(X)
 
 # ====================================Part 2================================
@@ -51,7 +52,7 @@ def hardlim(x):
 
 def ppn(p,t):
     epoch = 50
-    inputs = 8 # classes
+    inputs = 8
     b = np.ones(1)
     w = np.ones(inputs)
     lr = 0.15
@@ -71,7 +72,9 @@ def ppn(p,t):
         epoch_values.append(epoch_iter)
         epoch_iter += 1
 
-    print(w)
+    print(f'Running {epoch} epochs')
+    print('The weights are:', w)
+    print("The bias is:", b)
     #E.append(e)
     plt.plot(epoch_values, E_values)
     plt.ylabel('E')
